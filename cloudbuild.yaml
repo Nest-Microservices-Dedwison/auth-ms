@@ -6,7 +6,7 @@ steps:
         "-t",
         "southamerica-west1-docker.pkg.dev/tienda-microservicios-462023/image-registry/auth-ms",
         "-f",
-        "dockerfile.prod",
+        "Dockerfile.prod",
         "--platform=linux/amd64",
         ".",
       ]
