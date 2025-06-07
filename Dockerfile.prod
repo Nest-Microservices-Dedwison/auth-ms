@@ -29,6 +29,8 @@ RUN apt-get update && \
 # Copiar todos los archivos de la aplicación
 COPY . .
 
+# Asegura que los permisos sean adecuados para el directorio prisma y su contenido
+RUN chmod -R 755 ./prisma 
 
 RUN npx prisma generate
 
