@@ -26,6 +26,9 @@ RUN apt-get update && \
     apt-get install -y openssl build-essential pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
+# Primero, copia la carpeta prisma explícitamente
+COPY prisma ./prisma/ 
+
 # Copiar todos los archivos de la aplicación
 COPY . .
 
