@@ -27,13 +27,13 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Primero, copia la carpeta prisma explícitamente
-COPY prisma ./prisma/ 
+# COPY prisma ./prisma/ 
 
 # Copiar todos los archivos de la aplicación
 COPY . .
 
 # Asegura que los permisos sean adecuados para el directorio prisma y su contenido
-RUN chmod -R 755 ./prisma 
+# RUN chmod -R 755 ./prisma 
 
 RUN npx prisma generate
 
