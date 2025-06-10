@@ -62,7 +62,6 @@ export class AuthService extends PrismaClient implements OnModuleInit {
         const { email, name, password } = registerUserDto;
 
         try {
-
             const user = await this.user.findUnique({
                 where: { 
                     email: email,
@@ -83,12 +82,21 @@ export class AuthService extends PrismaClient implements OnModuleInit {
 
             const { password: _, ...userWithoutPassword } = newUser;
 
+
             return {
                 user: userWithoutPassword,
                 token: await this.signJWT( userWithoutPassword as JwtPayload )
             }
             
         } catch (error) {
+            // Log crítico para problemas de DB
+            if (error.message.includes('Server selection timeout') || 
+                error.message.includes('No available servers')) {
+                this.logger.error(`🚨 DATABASE CONNECTION ERROR: ${error.message}`);
+            } else {
+                this.logger.error(`Registration error for ${email}: ${error.message}`);
+            }
+
             throw new RpcException({
                 status: 400,
                 message: error.message
