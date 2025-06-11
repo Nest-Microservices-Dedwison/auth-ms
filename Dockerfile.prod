@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
 COPY package.json ./
 COPY package-lock.json ./
 
-# Aumentar el timeout de npm
+# Aumentar el timeout de npm*
 RUN npm config set fetch-timeout 900000
 
 RUN npm install
